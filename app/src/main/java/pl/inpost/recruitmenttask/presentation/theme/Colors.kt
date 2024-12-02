@@ -12,14 +12,18 @@ val teal_700 = Color(0xFF018786)
 val black = Color.Black
 val white = Color.White
 
+val surface = Color(0xFFF2F2F2)
+val onPrimary = Color(0xFF404041)
+
 val LightThemeColors = lightColors(
-    primary = purple_500,
+    primary = white,
     primaryVariant = purple_700,
-    onPrimary = white,
+    onPrimary = onPrimary,
     secondary = teal_200,
     secondaryVariant = teal_700,
     onSecondary = black,
-    surface = white,
+    surface = surface,
+    background = surface,
     error = Color.Red
 )
 

@@ -1,9 +1,11 @@
 package pl.inpost.recruitmenttask.presentation.theme
 
 import androidx.compose.material.Typography
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import pl.inpost.recruitmenttask.R
 
 val inPostRecruitmentTaskFonts = FontFamily(
@@ -20,4 +22,10 @@ val inPostRecruitmentTaskFonts = FontFamily(
 // Set of Material typography styles to start with
 val InPostRecruitmentTaskTypography = Typography(
     defaultFontFamily = inPostRecruitmentTaskFonts,
+    h6 = TextStyle(
+        fontSize = 15.sp,
+        fontWeight = FontWeight.Bold,
+        letterSpacing = 0.4.sp,
+        lineHeight = 24.sp
+    )
 )
