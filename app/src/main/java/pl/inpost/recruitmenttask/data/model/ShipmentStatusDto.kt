@@ -58,4 +58,6 @@ enum class ShipmentStatusDto {
 
     @Json(name = "RETURNED_TO_SENDER")
     RETURNED_TO_SENDER,
+
+    UNKNOWN,
 }

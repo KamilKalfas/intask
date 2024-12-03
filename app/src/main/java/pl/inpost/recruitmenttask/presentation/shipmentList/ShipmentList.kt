@@ -20,7 +20,7 @@ fun LazyListScope.shipmentsList(
         key = { item: ShipmentDto -> item.number }) { shipment ->
         ShipmentCard(
             number = shipment.number,
-            status = shipment.status,
+            status = shipment.status.name,
             sender = shipment.sender.let {
                 if (it == null) "no sender"
                 else sequenceOf(

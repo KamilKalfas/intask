@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.data.network
+package pl.inpost.recruitmenttask.data.network.adapters
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @Reusable
-class ApiTypeAdapter @Inject constructor() {
+class ZoneDateTimeTypeAdapter @Inject constructor() {
 
     private val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
 

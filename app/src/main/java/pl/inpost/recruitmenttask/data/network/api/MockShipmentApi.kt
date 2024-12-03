@@ -6,14 +6,16 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import pl.inpost.recruitmenttask.R
-import pl.inpost.recruitmenttask.data.network.ApiTypeAdapter
+import pl.inpost.recruitmenttask.data.network.adapters.ZoneDateTimeTypeAdapter
 import pl.inpost.recruitmenttask.data.model.*
+import pl.inpost.recruitmenttask.data.network.adapters.ShipmentStatusTypeAdapter
 import java.time.ZonedDateTime
 import kotlin.random.Random
 
 class MockShipmentApi(
     @ApplicationContext private val context: Context,
-    apiTypeAdapter: ApiTypeAdapter
+    zoneDateTimeTypeAdapter: ZoneDateTimeTypeAdapter,
+    statusTypeAdapter: ShipmentStatusTypeAdapter,
 ) : ShipmentApi {
 
     private val response by lazy {
@@ -23,7 +25,8 @@ class MockShipmentApi(
 
         val jsonAdapter = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
-            .add(apiTypeAdapter)
+            .add(zoneDateTimeTypeAdapter)
+            .add(statusTypeAdapter)
             .build()
             .adapter(ShipmentsResponse::class.java)
 
