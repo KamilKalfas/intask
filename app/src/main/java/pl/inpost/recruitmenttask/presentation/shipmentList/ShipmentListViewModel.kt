@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pl.inpost.recruitmenttask.network.api.ShipmentApi
+import pl.inpost.recruitmenttask.data.network.api.ShipmentApi
 import pl.inpost.recruitmenttask.data.model.ShipmentDto
 import javax.inject.Inject
 

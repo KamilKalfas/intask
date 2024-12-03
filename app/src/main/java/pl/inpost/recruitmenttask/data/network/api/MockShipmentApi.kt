@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.network.api
+package pl.inpost.recruitmenttask.data.network.api
 
 import android.content.Context
 import com.squareup.moshi.Moshi
@@ -6,7 +6,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import pl.inpost.recruitmenttask.R
-import pl.inpost.recruitmenttask.network.ApiTypeAdapter
+import pl.inpost.recruitmenttask.data.network.ApiTypeAdapter
 import pl.inpost.recruitmenttask.data.model.*
 import java.time.ZonedDateTime
 import kotlin.random.Random
@@ -57,7 +57,7 @@ private fun mockShipmentNetwork(
 ) = ShipmentDto(
     number = number,
     shipmentType = type.name,
-    status = status.name,
+    status = status,
     eventLog = eventLog,
     openCode = openCode,
     expiryDate = expireDate,

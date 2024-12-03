@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.network.api
+package pl.inpost.recruitmenttask.data.network.api
 
 import pl.inpost.recruitmenttask.data.model.ShipmentDto
 
