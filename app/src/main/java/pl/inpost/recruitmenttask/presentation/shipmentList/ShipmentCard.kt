@@ -13,20 +13,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import pl.inpost.recruitmenttask.domain.model.Customer
+import pl.inpost.recruitmenttask.domain.model.Shipment
+import pl.inpost.recruitmenttask.domain.model.ShipmentStatus
 import pl.inpost.recruitmenttask.presentation.theme.InPostRecruitmentTaskTheme
+import java.time.ZonedDateTime
 
 @Composable
 fun ShipmentCard(
-    number: String,
-    status: String,
-    sender: String,
+    shipment: Shipment,
     onClick: () -> Unit,
     modifier: Modifier
 ) {
     ShipmentCardContent(
-        number = number,
-        status = status,
-        sender = sender,
+        shipment = shipment,
         onClick = onClick,
         modifier = modifier
     )
@@ -34,9 +34,7 @@ fun ShipmentCard(
 
 @Composable
 private fun ShipmentCardContent(
-    number: String,
-    status: String,
-    sender: String,
+    shipment: Shipment,
     onClick: () -> Unit,
     modifier: Modifier
 ) {
@@ -47,13 +45,17 @@ private fun ShipmentCardContent(
             .padding(top = 16.dp, bottom = 8.dp)
     ) {
         Text("NR PRZESYLKI")
-        Text(number)
+        Text(shipment.number)
         Spacer(modifier = Modifier.height(16.dp))
         Text("STATUS")
-        Text(status)
+        Text(shipment.status.toString())
         Spacer(modifier = Modifier.height(16.dp))
         Text("NADAWCA")
-        Text(sender)
+        val senderName = when (val name = shipment.sender.name) {
+            is Customer.Sender.Named -> name.value
+            Customer.Sender.NoSender -> "unknown"
+        }
+        Text(senderName)
     }
 }
 
@@ -63,9 +65,11 @@ private fun preview_content() {
     InPostRecruitmentTaskTheme {
         Surface {
             ShipmentCardContent(
-                number = "16730345345597442248333",
-                status = "READY_TO_PICKUP",
-                sender = "sender@example.com",
+                shipment = Shipment(
+                    number = "16730345345597442248333",
+                    sender = Customer("sender@example.com", null, null),
+                    status = ShipmentStatus.ReadyToPickup(ZonedDateTime.parse("2022-11-29T04:56:07Z"))
+                    ),
                 onClick = {},
                 modifier = Modifier.fillMaxWidth()
             )

@@ -9,30 +9,32 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.inpost.recruitmenttask.data.network.api.ShipmentApi
 import pl.inpost.recruitmenttask.data.model.ShipmentDto
+import pl.inpost.recruitmenttask.domain.model.Shipment
+import pl.inpost.recruitmenttask.domain.repository.ShipmentsRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class ShipmentListViewModel @Inject constructor(
-    private val shipmentApi: ShipmentApi
+    private val shipmentsRepository: ShipmentsRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state
 
     init {
-//        refreshData()
+        refreshData()
     }
 
     fun refreshData() {
         viewModelScope.launch {
             _state.update { old -> old.copy(isLoading = true) }
-            val shipments = shipmentApi.getShipments()
+            val shipments = shipmentsRepository.getShipments()
             _state.update { old -> old.copy(isLoading = false, shipments = shipments) }
         }
     }
 
     data class UiState(
         val isLoading: Boolean = false,
-        val shipments: List<ShipmentDto> = emptyList()
+        val shipments: List<Shipment> = emptyList()
     )
 }

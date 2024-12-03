@@ -9,26 +9,17 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import pl.inpost.recruitmenttask.data.model.ShipmentDto
+import pl.inpost.recruitmenttask.domain.model.Shipment
 
 fun LazyListScope.shipmentsList(
-    shipments: List<ShipmentDto>,
+    shipments: List<Shipment>,
 ) {
     if (shipments.isEmpty()) noShipmentsMessage()
     else items(
         items = shipments,
-        key = { item: ShipmentDto -> item.number }) { shipment ->
+        key = { item: Shipment -> item.number }) {
         ShipmentCard(
-            number = shipment.number,
-            status = shipment.status.name,
-            sender = shipment.sender.let {
-                if (it == null) "no sender"
-                else sequenceOf(
-                    it.name,
-                    it.email,
-                    it.phoneNumber
-                ).firstOrNull { it != null } ?: "no sender"
-            },
+            shipment = it,
             onClick = { /*TODO*/ },
             modifier = Modifier.fillMaxWidth()
         )
