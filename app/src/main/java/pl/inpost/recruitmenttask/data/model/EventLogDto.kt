@@ -1,8 +1,8 @@
-package pl.inpost.recruitmenttask.network.model
+package pl.inpost.recruitmenttask.data.model
 
 import java.time.ZonedDateTime
 
-data class EventLogNetwork(
+data class EventLogDto(
     val name: String,
     val date: ZonedDateTime
 )

@@ -7,7 +7,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import pl.inpost.recruitmenttask.R
 import pl.inpost.recruitmenttask.network.ApiTypeAdapter
-import pl.inpost.recruitmenttask.network.model.*
+import pl.inpost.recruitmenttask.data.model.*
 import java.time.ZonedDateTime
 import kotlin.random.Random
 
@@ -31,7 +31,7 @@ class MockShipmentApi(
     }
     private var firstUse = true
 
-    override suspend fun getShipments(): List<ShipmentNetwork> {
+    override suspend fun getShipments(): List<ShipmentDto> {
         delay(1000)
         return if (firstUse) {
             firstUse = false
@@ -44,17 +44,17 @@ class MockShipmentApi(
 
 private fun mockShipmentNetwork(
     number: String = Random.nextLong(1, 9999_9999_9999_9999).toString(),
-    type: ShipmentType = ShipmentType.PARCEL_LOCKER,
-    status: ShipmentStatus = ShipmentStatus.DELIVERED,
-    sender: CustomerNetwork? = mockCustomerNetwork(),
-    receiver: CustomerNetwork? = mockCustomerNetwork(),
-    operations: OperationsNetwork = mockOperationsNetwork(),
-    eventLog: List<EventLogNetwork> = emptyList(),
+    type: ShipmentTypeDto = ShipmentTypeDto.PARCEL_LOCKER,
+    status: ShipmentStatusDto = ShipmentStatusDto.DELIVERED,
+    sender: CustomerDto? = mockCustomerNetwork(),
+    receiver: CustomerDto? = mockCustomerNetwork(),
+    operations: OperationsDto = mockOperationsNetwork(),
+    eventLog: List<EventLogDto> = emptyList(),
     openCode: String? = null,
     expireDate: ZonedDateTime? = null,
     storedDate: ZonedDateTime? = null,
     pickupDate: ZonedDateTime? = null
-) = ShipmentNetwork(
+) = ShipmentDto(
     number = number,
     shipmentType = type.name,
     status = status.name,
@@ -72,7 +72,7 @@ private fun mockCustomerNetwork(
     email: String = "name@email.com",
     phoneNumber: String = "123 123 123",
     name: String = "Jan Kowalski"
-) = CustomerNetwork(
+) = CustomerDto(
     email = email,
     phoneNumber = phoneNumber,
     name = name
@@ -85,7 +85,7 @@ private fun mockOperationsNetwork(
     highlight: Boolean = false,
     expandAvizo: Boolean = false,
     endOfWeekCollection: Boolean = false
-) = OperationsNetwork(
+) = OperationsDto(
     manualArchive = manualArchive,
     delete = delete,
     collect = collect,

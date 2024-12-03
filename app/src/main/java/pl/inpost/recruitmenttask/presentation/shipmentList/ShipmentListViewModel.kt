@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.inpost.recruitmenttask.network.api.ShipmentApi
-import pl.inpost.recruitmenttask.network.model.ShipmentNetwork
+import pl.inpost.recruitmenttask.data.model.ShipmentDto
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,10 +20,10 @@ class ShipmentListViewModel @Inject constructor(
     val state: StateFlow<UiState> = _state
 
     init {
-        refreshData()
+//        refreshData()
     }
 
-    private fun refreshData() {
+    fun refreshData() {
         viewModelScope.launch {
             _state.update { old -> old.copy(isLoading = true) }
             val shipments = shipmentApi.getShipments()
@@ -33,6 +33,6 @@ class ShipmentListViewModel @Inject constructor(
 
     data class UiState(
         val isLoading: Boolean = false,
-        val shipments: List<ShipmentNetwork> = emptyList()
+        val shipments: List<ShipmentDto> = emptyList()
     )
 }

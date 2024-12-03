@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.network.model
+package pl.inpost.recruitmenttask.data.model
 
 import androidx.annotation.StringRes
 import pl.inpost.recruitmenttask.R
@@ -19,7 +19,7 @@ import pl.inpost.recruitmenttask.R
  * 12. READY_TO_PICKUP
  * 13. PICKUP_TIME_EXPIRED
  */
-enum class ShipmentStatus(
+enum class ShipmentStatusDto(
     @StringRes val nameRes: Int
 ) {
     ADOPTED_AT_SORTING_CENTER(R.string.status_adopted_at_sorting_center),

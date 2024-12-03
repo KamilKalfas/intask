@@ -1,17 +1,17 @@
-package pl.inpost.recruitmenttask.network.model
+package pl.inpost.recruitmenttask.data.model
 
 import java.time.ZonedDateTime
 
-data class ShipmentNetwork(
+data class ShipmentDto(
     val number: String,
     val shipmentType: String,
     val status: String,
-    val eventLog: List<EventLogNetwork>,
+    val eventLog: List<EventLogDto>,
     val openCode: String?,
     val expiryDate: ZonedDateTime?,
     val storedDate: ZonedDateTime?,
     val pickUpDate: ZonedDateTime?,
-    val receiver: CustomerNetwork?,
-    val sender: CustomerNetwork?,
-    val operations: OperationsNetwork
+    val receiver: CustomerDto?,
+    val sender: CustomerDto?,
+    val operations: OperationsDto
 )

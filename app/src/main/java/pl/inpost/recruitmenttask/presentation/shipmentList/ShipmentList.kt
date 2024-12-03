@@ -9,15 +9,15 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import pl.inpost.recruitmenttask.network.model.ShipmentNetwork
+import pl.inpost.recruitmenttask.data.model.ShipmentDto
 
 fun LazyListScope.shipmentsList(
-    shipments: List<ShipmentNetwork>,
+    shipments: List<ShipmentDto>,
 ) {
     if (shipments.isEmpty()) noShipmentsMessage()
     else items(
         items = shipments,
-        key = { item: ShipmentNetwork -> item.number }) { shipment ->
+        key = { item: ShipmentDto -> item.number }) { shipment ->
         ShipmentCard(
             number = shipment.number,
             status = shipment.status,
