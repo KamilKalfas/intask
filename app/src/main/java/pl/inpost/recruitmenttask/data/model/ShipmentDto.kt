@@ -4,7 +4,7 @@ import java.time.ZonedDateTime
 
 data class ShipmentDto(
     val number: String,
-    val shipmentType: String,
+    val shipmentType: ShipmentTypeDto,
     val status: ShipmentStatusDto,
     val eventLog: List<EventLogDto>,
     val openCode: String?,
