@@ -1,10 +1,13 @@
 package pl.inpost.recruitmenttask.presentation.theme
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import pl.inpost.recruitmenttask.R
 
@@ -29,3 +32,14 @@ val InPostRecruitmentTaskTypography = Typography(
         lineHeight = 24.sp
     )
 )
+
+val Typography.dividerText
+    @Composable
+    get() = TextStyle(
+        fontFamily = inPostRecruitmentTaskFonts,
+        fontSize = 13.sp,
+        fontWeight = FontWeight.SemiBold,
+        lineHeight = 16.sp,
+        textAlign = TextAlign.Center,
+        color = MaterialTheme.colors.dividerText
+    )
