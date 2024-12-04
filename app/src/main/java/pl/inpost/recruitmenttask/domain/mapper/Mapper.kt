@@ -21,9 +21,9 @@ fun ShipmentDto.toDomain(): Shipment {
 fun CustomerDto?.toDomain(): Customer {
     return if (this == null) Customer.EMPTY
     else Customer(
-        _email = email,
-        _name = name,
-        _phoneNumber = phoneNumber
+        email = email,
+        name = name,
+        phoneNumber = phoneNumber
     )
 }
 
