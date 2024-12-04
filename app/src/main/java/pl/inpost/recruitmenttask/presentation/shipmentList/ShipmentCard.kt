@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.inpost.recruitmenttask.domain.model.Customer
+import pl.inpost.recruitmenttask.domain.model.Operations
 import pl.inpost.recruitmenttask.domain.model.Shipment
 import pl.inpost.recruitmenttask.domain.model.ShipmentStatus
 import pl.inpost.recruitmenttask.presentation.theme.InPostRecruitmentTaskTheme
@@ -68,7 +69,8 @@ private fun preview_content() {
                 shipment = Shipment(
                     number = "16730345345597442248333",
                     sender = Customer("sender@example.com", null, null),
-                    status = ShipmentStatus.ReadyToPickup(ZonedDateTime.parse("2022-11-29T04:56:07Z"))
+                    status = ShipmentStatus.ReadyToPickup(ZonedDateTime.parse("2022-11-29T04:56:07Z")),
+                    operations = Operations(false, false,false, false,false, false,)
                     ),
                 onClick = {},
                 modifier = Modifier.fillMaxWidth()
