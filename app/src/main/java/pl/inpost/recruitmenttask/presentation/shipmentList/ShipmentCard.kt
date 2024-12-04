@@ -10,9 +10,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import pl.inpost.recruitmenttask.R
 import pl.inpost.recruitmenttask.domain.model.Customer
 import pl.inpost.recruitmenttask.domain.model.Operations
 import pl.inpost.recruitmenttask.domain.model.Shipment
@@ -39,6 +42,12 @@ private fun ShipmentCardContent(
     onClick: () -> Unit,
     modifier: Modifier
 ) {
+    val senderName = remember(shipment.sender) {
+        shipment.sender.let { sender ->
+            sequenceOf(sender.name, sender.email, sender.phoneNumber).firstOrNull()
+        }
+    }
+
     Column(
         modifier = modifier
             .background(MaterialTheme.colors.background)
@@ -52,11 +61,7 @@ private fun ShipmentCardContent(
         Text(shipment.status.toString())
         Spacer(modifier = Modifier.height(16.dp))
         Text("NADAWCA")
-        val senderName = when (val name = shipment.sender.name) {
-            is Customer.Sender.Named -> name.value
-            Customer.Sender.NoSender -> "unknown"
-        }
-        Text(senderName)
+        Text(senderName ?: stringResource(id = R.string.sender_unknown))
     }
 }
 

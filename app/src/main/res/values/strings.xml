@@ -17,4 +17,6 @@
 
     <string name="shipments_category_ready_to_pickup">Gotowe do odbioru</string>
     <string name="shipments_category_rest">Pozostale</string>
+
+    <string name="sender_unknown">Brak informacji</string>
 </resources>
