@@ -1,6 +1,5 @@
 package pl.inpost.recruitmenttask.domain.model
 
-
 enum class ShipmentStatus {
     CREATED,
 

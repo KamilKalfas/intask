@@ -32,7 +32,7 @@ class ShipmentListViewModel @Inject constructor(
             _state.update { old -> old.copy(isLoading = true) }
 
             when (val result = shipmentsGroupedByHighlightedUseCase.execute()) {
-                GroupedShipmentsResult.Error -> {
+                is GroupedShipmentsResult.Error -> {
                     // TODO() add some error UI information
                 }
 
