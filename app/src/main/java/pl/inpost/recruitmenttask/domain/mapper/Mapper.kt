@@ -2,16 +2,19 @@ package pl.inpost.recruitmenttask.domain.mapper
 
 import pl.inpost.recruitmenttask.data.model.CustomerDto
 import pl.inpost.recruitmenttask.data.model.OperationsDto
-import pl.inpost.recruitmenttask.data.model.ShipmentStatusDto
 import pl.inpost.recruitmenttask.data.model.ShipmentDto
+import pl.inpost.recruitmenttask.data.model.ShipmentStatusDto
+import pl.inpost.recruitmenttask.data.model.ShipmentTypeDto
 import pl.inpost.recruitmenttask.domain.model.Customer
 import pl.inpost.recruitmenttask.domain.model.Operations
 import pl.inpost.recruitmenttask.domain.model.Shipment
 import pl.inpost.recruitmenttask.domain.model.ShipmentStatus
+import pl.inpost.recruitmenttask.domain.model.ShipmentType
 
 fun ShipmentDto.toDomain(): Shipment {
     return Shipment(
         number = number,
+        type = shipmentType.toDomain(),
         sender = sender.toDomain(),
         status = status.toDomain(),
         operations = operations.toDomain(),
@@ -28,6 +31,13 @@ fun CustomerDto?.toDomain(): Customer {
         name = name,
         phoneNumber = phoneNumber
     )
+}
+
+fun ShipmentTypeDto.toDomain() : ShipmentType {
+    return when (this) {
+        ShipmentTypeDto.PARCEL_LOCKER -> ShipmentType.LOCKER
+        ShipmentTypeDto.COURIER -> ShipmentType.COURIER
+    }
 }
 
 fun ShipmentStatusDto.toDomain(): ShipmentStatus {

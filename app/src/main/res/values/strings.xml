@@ -18,5 +18,10 @@
     <string name="shipments_category_ready_to_pickup">Gotowe do odbioru</string>
     <string name="shipments_category_rest">Pozostale</string>
 
-    <string name="sender_unknown">Brak informacji</string>
+    <string name="unknown">Brak informacji</string>
+
+    <string name="shipment_card_number_label">Nr przesyłki</string>
+    <string name="shipment_card_status_label">Status</string>
+    <string name="shipment_card_sender_label">Nadawca</string>
+    <string name="shipment_card_more_button_label">więcej</string>
 </resources>
