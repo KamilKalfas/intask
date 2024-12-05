@@ -43,3 +43,40 @@ val Typography.dividerText
         textAlign = TextAlign.Center,
         color = MaterialTheme.colors.dividerText
     )
+
+val Typography.shipmentCardLabel
+    @Composable
+    get() = TextStyle(
+        fontFamily = inPostRecruitmentTaskFonts,
+        fontSize = 11.sp,
+        fontWeight = FontWeight.SemiBold,
+        lineHeight = 16.sp,
+        color = MaterialTheme.colors.shipmentCardLabelColor
+    )
+
+val Typography.shipmentCardTextNormal
+    @Composable
+    get() = TextStyle(
+        fontFamily = inPostRecruitmentTaskFonts,
+        fontSize = 15.sp,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 24.sp,
+    )
+
+val Typography.shipmentCardTextBold
+    @Composable
+    get() = TextStyle(
+        fontFamily = inPostRecruitmentTaskFonts,
+        fontSize = 15.sp,
+        fontWeight = FontWeight.Bold,
+        lineHeight = 24.sp,
+    )
+
+val Typography.shipmentCardTextButton
+    @Composable
+    get() = TextStyle(
+        fontFamily = inPostRecruitmentTaskFonts,
+        fontSize = 12.sp,
+        fontWeight = FontWeight.Bold,
+        lineHeight = 16.sp,
+    )

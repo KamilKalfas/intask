@@ -33,6 +33,10 @@ import pl.inpost.recruitmenttask.domain.model.ShipmentStatus
 import pl.inpost.recruitmenttask.domain.model.ShipmentType
 import pl.inpost.recruitmenttask.presentation.theme.InPostRecruitmentTaskTheme
 import pl.inpost.recruitmenttask.presentation.theme.brandingYellow
+import pl.inpost.recruitmenttask.presentation.theme.shipmentCardLabel
+import pl.inpost.recruitmenttask.presentation.theme.shipmentCardTextBold
+import pl.inpost.recruitmenttask.presentation.theme.shipmentCardTextButton
+import pl.inpost.recruitmenttask.presentation.theme.shipmentCardTextNormal
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
@@ -92,8 +96,14 @@ private fun ShipmentNumberRow(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
-            Text(text = stringResource(id = R.string.shipment_card_number_label))
-            Text(text = shipmentNumber)
+            Text(
+                text = stringResource(id = R.string.shipment_card_number_label),
+                style = MaterialTheme.typography.shipmentCardLabel
+            )
+            Text(
+                text = shipmentNumber,
+                style = MaterialTheme.typography.shipmentCardTextNormal
+            )
         }
         Icon(
             painter = painterResource(id = deliveryIcon),
@@ -116,15 +126,25 @@ private fun ShipmentStatusRow(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
-            Text(text = stringResource(id = R.string.shipment_card_status_label))
-            Text(shipmentStatus)
+            LabelText(
+                text = stringResource(id = R.string.shipment_card_status_label)
+            )
+            Text(
+                text = shipmentStatus,
+                style = MaterialTheme.typography.shipmentCardTextBold
+            )
         }
         if (showExtendedStatus) {
             Column(
                 horizontalAlignment = Alignment.End
             ) {
-                Text(text = shipmentStatus)
-                Text(text = shipmentFormattedDate)
+                LabelText(
+                    text = shipmentStatus
+                )
+                Text(
+                    text = shipmentFormattedDate,
+                    style = MaterialTheme.typography.shipmentCardTextNormal
+                )
             }
         }
     }
@@ -143,12 +163,13 @@ private fun ShipmentSenderRow(
                 onClick()
             }
     ) {
-        Text(
+        LabelText(
             modifier = Modifier.align(Alignment.TopStart),
-            text = stringResource(id = R.string.shipment_card_sender_label)
+            text = stringResource(R.string.shipment_card_sender_label)
         )
         Text(
             modifier = Modifier.align(Alignment.BottomStart),
+            style = MaterialTheme.typography.shipmentCardTextBold,
             text = senderName
         )
         Row(
@@ -156,8 +177,8 @@ private fun ShipmentSenderRow(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                color = Color.Black,
-                text = stringResource(id = R.string.shipment_card_more_button_label),
+                text = stringResource(R.string.shipment_card_more_button_label),
+                style = MaterialTheme.typography.shipmentCardTextButton
             )
             Icon(
                 painter = painterResource(id = R.drawable.ic_arrow),
@@ -168,6 +189,17 @@ private fun ShipmentSenderRow(
     }
 }
 
+
+@Composable
+fun LabelText(
+    modifier: Modifier = Modifier,
+    text: String
+) = Text(
+    modifier = modifier,
+    text = text,
+    style = MaterialTheme.typography.shipmentCardLabel
+)
+
 @Preview
 @Composable
 private fun preview_content() {
@@ -177,7 +209,10 @@ private fun preview_content() {
         sender = Customer("sender@example.com", null, null),
         status = ShipmentStatus.READY_TO_PICKUP,
         operations = Operations(false, false, false, false, false, false),
-        pickupDate = ZonedDateTime.parse("2022-11-05T04:56:07Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+        pickupDate = ZonedDateTime.parse(
+            "2022-11-05T04:56:07Z",
+            DateTimeFormatter.ISO_OFFSET_DATE_TIME
+        ),
         expireDate = null,
         storedDate = null,
     )
@@ -185,7 +220,10 @@ private fun preview_content() {
         Surface {
             ShipmentCardContent(
                 number = shipment.number,
-                state = ShipmentCardState(shipment = shipment, resources = LocalContext.current.resources),
+                state = ShipmentCardState(
+                    shipment = shipment,
+                    resources = LocalContext.current.resources
+                ),
                 onClick = {},
                 modifier = Modifier.fillMaxWidth()
             )
