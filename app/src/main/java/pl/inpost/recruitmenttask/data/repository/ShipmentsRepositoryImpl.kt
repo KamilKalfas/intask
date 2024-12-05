@@ -1,9 +1,9 @@
 package pl.inpost.recruitmenttask.data.repository
 
+import pl.inpost.recruitmenttask.data.network.api.ShipmentApi
 import pl.inpost.recruitmenttask.domain.mapper.toDomain
 import pl.inpost.recruitmenttask.domain.model.Shipment
 import pl.inpost.recruitmenttask.domain.repository.ShipmentsRepository
-import pl.inpost.recruitmenttask.data.network.api.ShipmentApi
 
 class ShipmentsRepositoryImpl(
     private val shipmentApi: ShipmentApi

@@ -21,7 +21,6 @@ import pl.inpost.recruitmenttask.domain.model.Operations
 import pl.inpost.recruitmenttask.domain.model.Shipment
 import pl.inpost.recruitmenttask.domain.model.ShipmentStatus
 import pl.inpost.recruitmenttask.presentation.theme.InPostRecruitmentTaskTheme
-import java.time.ZonedDateTime
 
 @Composable
 fun ShipmentCard(
@@ -74,9 +73,12 @@ private fun preview_content() {
                 shipment = Shipment(
                     number = "16730345345597442248333",
                     sender = Customer("sender@example.com", null, null),
-                    status = ShipmentStatus.ReadyToPickup(ZonedDateTime.parse("2022-11-29T04:56:07Z")),
-                    operations = Operations(false, false,false, false,false, false,)
-                    ),
+                    status = ShipmentStatus.READY_TO_PICKUP,
+                    operations = Operations(false, false, false, false, false, false),
+                    pickupDate = null,
+                    expireDate = null,
+                    storedDate = null,
+                ),
                 onClick = {},
                 modifier = Modifier.fillMaxWidth()
             )
