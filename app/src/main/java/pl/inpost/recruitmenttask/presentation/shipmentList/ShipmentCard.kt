@@ -98,6 +98,7 @@ private fun ShipmentNumberRow(
         Icon(
             painter = painterResource(id = deliveryIcon),
             contentDescription = null,
+            tint = Color.Unspecified
         )
     }
 }
@@ -119,7 +120,9 @@ private fun ShipmentStatusRow(
             Text(shipmentStatus)
         }
         if (showExtendedStatus) {
-            Column {
+            Column(
+                horizontalAlignment = Alignment.End
+            ) {
                 Text(text = shipmentStatus)
                 Text(text = shipmentFormattedDate)
             }
@@ -185,6 +188,20 @@ private fun preview_content() {
                 state = ShipmentCardState(shipment = shipment, resources = LocalContext.current.resources),
                 onClick = {},
                 modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewShipmentStatusRow() {
+    InPostRecruitmentTaskTheme {
+        Surface {
+            ShipmentStatusRow(
+                stringResource(id = R.string.status_ready_to_pickup),
+                showExtendedStatus = true,
+                shipmentFormattedDate = "pt. | 25.11.22 | 04:56"
             )
         }
     }
