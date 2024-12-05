@@ -20,11 +20,11 @@ import com.squareup.moshi.Json
  */
 enum class ShipmentStatusDto {
 
-    @Json(name = "ADOPTED_AT_SORTING_CENTER")
-    ADOPTED_AT_SORTING_CENTER,
+    @Json(name = "CREATED")
+    CREATED,
 
-    @Json(name = "SENT_FROM_SORTING_CENTER")
-    SENT_FROM_SORTING_CENTER,
+    @Json(name = "CONFIRMED")
+    CONFIRMED,
 
     @Json(name = "ADOPTED_AT_SOURCE_BRANCH")
     ADOPTED_AT_SOURCE_BRANCH,
@@ -32,32 +32,32 @@ enum class ShipmentStatusDto {
     @Json(name = "SENT_FROM_SOURCE_BRANCH")
     SENT_FROM_SOURCE_BRANCH,
 
-    @Json(name = "AVIZO")
-    AVIZO,
+    @Json(name = "ADOPTED_AT_SORTING_CENTER")
+    ADOPTED_AT_SORTING_CENTER,
 
-    @Json(name = "CONFIRMED")
-    CONFIRMED,
-
-    @Json(name = "CREATED")
-    CREATED,
-
-    @Json(name = "DELIVERED")
-    DELIVERED,
+    @Json(name = "SENT_FROM_SORTING_CENTER")
+    SENT_FROM_SORTING_CENTER,
 
     @Json(name = "OTHER")
     OTHER,
 
+    @Json(name = "DELIVERED")
+    DELIVERED,
+
+    @Json(name = "RETURNED_TO_SENDER")
+    RETURNED_TO_SENDER,
+
+    @Json(name = "AVIZO")
+    AVIZO,
+
     @Json(name = "OUT_FOR_DELIVERY")
     OUT_FOR_DELIVERY,
-
-    @Json(name = "PICKUP_TIME_EXPIRED")
-    PICKUP_TIME_EXPIRED,
 
     @Json(name = "READY_TO_PICKUP")
     READY_TO_PICKUP,
 
-    @Json(name = "RETURNED_TO_SENDER")
-    RETURNED_TO_SENDER,
+    @Json(name = "PICKUP_TIME_EXPIRED")
+    PICKUP_TIME_EXPIRED,
 
     UNKNOWN,
 }
