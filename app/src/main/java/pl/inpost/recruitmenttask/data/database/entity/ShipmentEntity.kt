@@ -15,6 +15,6 @@ data class ShipmentEntity(
     @ColumnInfo(name = "expire_date") val expireDate: ZonedDateTime?,
     @ColumnInfo(name = "stored_date") val storedDate: ZonedDateTime?,
     @ColumnInfo(name = "pickup_date") val pickupDate: ZonedDateTime?,
-    val senderId: Long?,
-    val operationsId: Long
+    @ColumnInfo(name = "customer_id")val senderId: Long?,
+    @ColumnInfo(name = "operation_id")val operationId: Long //aaaaand again not using @ColumnInfo bite my a** :<
 )

@@ -5,8 +5,8 @@ import androidx.room.Insert
 import pl.inpost.recruitmenttask.data.database.entity.CustomerEntity
 
 @Dao
-interface CustomerDao {
-    
+interface CustomersDao {
+
     @Insert
     suspend fun insert(entity: CustomerEntity) : Long
 }

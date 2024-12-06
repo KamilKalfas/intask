@@ -13,11 +13,14 @@ class ShipmentsRepositoryImpl(
     private var dataSavedInDb = false
 
     override suspend fun getShipments(): List<Shipment> {
-        val shipments = remoteDataSource.getShipments()
-        if (shipments.isNotEmpty() && !dataSavedInDb) {
-            dataSavedInDb = true
-            localDataSource.insertAll(shipments)
-        }
+        val shipments = if (!dataSavedInDb) {
+            val remoteShipments = remoteDataSource.getShipments()
+            if (remoteShipments.isNotEmpty()) {
+                localDataSource.insertAll(remoteShipments)
+                dataSavedInDb = true
+            }
+            remoteShipments
+        } else localDataSource.getShipments()
         return shipments
     }
-}
+}}

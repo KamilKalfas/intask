@@ -8,9 +8,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import pl.inpost.recruitmenttask.data.database.AppDatabase
-import pl.inpost.recruitmenttask.data.database.CustomerDao
+import pl.inpost.recruitmenttask.data.database.CustomersDao
 import pl.inpost.recruitmenttask.data.database.ShipmentsDao
-import pl.inpost.recruitmenttask.data.database.entity.OperationsDao
+import pl.inpost.recruitmenttask.data.database.OperationsDao
 import pl.inpost.recruitmenttask.data.datasource.ShipmentsLocalDataSource
 import pl.inpost.recruitmenttask.data.datasource.ShipmentsRemoteDataSource
 import pl.inpost.recruitmenttask.data.network.adapters.ShipmentStatusTypeAdapter
@@ -48,7 +48,7 @@ object DataModule {
     @Provides
     fun provideLocalDataSource(
         shipmentsDao: ShipmentsDao,
-        customerDao: CustomerDao,
+        customerDao: CustomersDao,
         operationsDao: OperationsDao
     ): ShipmentsLocalDataSource {
         return ShipmentsLocalDataSource(
@@ -75,7 +75,7 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideCustomerDao(db: AppDatabase): CustomerDao {
+    fun provideCustomerDao(db: AppDatabase): CustomersDao {
         return db.customersDao()
     }
 
