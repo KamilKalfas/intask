@@ -13,9 +13,14 @@ class Converters {
     private val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
 
     @TypeConverter
-    fun fromString(value: String): ZonedDateTime = formatter.parse(value, ZonedDateTime::from)
+    fun fromString(value: String?): ZonedDateTime? {
+        return try {
+            formatter.parse(value, ZonedDateTime::from)
+        } catch (e: NullPointerException) {
+            null
+        }
+    }
 
     @TypeConverter
-
     fun dateToString(date: ZonedDateTime?): String? = date?.format(formatter)
 }
