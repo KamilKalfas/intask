@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import pl.inpost.recruitmenttask.data.datasource.ShipmentsRemoteDataSource
 import pl.inpost.recruitmenttask.data.network.adapters.ShipmentStatusTypeAdapter
 import pl.inpost.recruitmenttask.data.network.adapters.ZoneDateTimeTypeAdapter
 import pl.inpost.recruitmenttask.data.network.api.MockShipmentApi
@@ -17,6 +18,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object DataModule {
+
     @Provides
     @Singleton
     fun shipmentApi(
@@ -27,6 +29,11 @@ object DataModule {
 
     @Provides
     fun provideShipmentRepository(
-        shipmentApi: ShipmentApi,
-    ) : ShipmentsRepository = ShipmentsRepositoryImpl(shipmentApi)
+        remoteDataSource: ShipmentsRemoteDataSource,
+    ): ShipmentsRepository = ShipmentsRepositoryImpl(remoteDataSource)
+
+    @Provides
+    fun provideRemoteDataSource(api: ShipmentApi): ShipmentsRemoteDataSource {
+        return ShipmentsRemoteDataSource(api)
+    }
 }
