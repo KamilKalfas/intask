@@ -1,5 +1,6 @@
 package pl.inpost.recruitmenttask.domain.usecase
 
+import pl.inpost.recruitmenttask.domain.exceptions.Failure
 import pl.inpost.recruitmenttask.domain.model.Shipment
 import pl.inpost.recruitmenttask.domain.repository.ShipmentsRepository
 
@@ -11,19 +12,17 @@ class GetShipmentsGroupedByHighlightedUseCase(
     suspend fun execute(): GroupedShipmentsResult {
         return try {
             val grouped = shipmentsRepository.getShipments()
+                .filter { it.operations.manualArchive }
                 .groupBy { shipment: Shipment -> shipment.operations.highlight }
                 .mapValues { (_, group) -> sortShipmentsUseCase.execute(group) }
             val readyToPickup = grouped[true] ?: emptyList()
             val rest = grouped[false] ?: emptyList()
-
-            GroupedShipmentsResult.Success(readyToPickup, rest)
+            GroupedShipmentsResult(readyToPickup, rest)
         } catch (e: Exception) {
-            GroupedShipmentsResult.Error(e)
+            throw GroupedShipmentsResultFailure(e)
         }
     }
 }
 
-sealed class GroupedShipmentsResult {
-    data class Success(val readyToPickup: List<Shipment>, val rest: List<Shipment>) : GroupedShipmentsResult()
-    data class Error(val exception: Exception) : GroupedShipmentsResult()
-}
+data class GroupedShipmentsResult(val readyToPickup: List<Shipment>, val rest: List<Shipment>)
+data class GroupedShipmentsResultFailure(val error: Exception) : Failure.FeatureFailure()

@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import pl.inpost.recruitmenttask.domain.repository.ShipmentsRepository
+import pl.inpost.recruitmenttask.domain.usecase.ArchiveShipmentUseCase
 import pl.inpost.recruitmenttask.domain.usecase.GetShipmentsGroupedByHighlightedUseCase
 import pl.inpost.recruitmenttask.domain.usecase.SortShipmentsUseCase
 
@@ -13,10 +14,21 @@ import pl.inpost.recruitmenttask.domain.usecase.SortShipmentsUseCase
 object DomainModule {
 
     @Provides
-    fun provideGetShipmentGroupedUseCase(shipmentsRepository: ShipmentsRepository, sortShipmentsUseCase: SortShipmentsUseCase) : GetShipmentsGroupedByHighlightedUseCase {
+    fun provideGetShipmentGroupedUseCase(
+        shipmentsRepository: ShipmentsRepository,
+        sortShipmentsUseCase: SortShipmentsUseCase
+    ): GetShipmentsGroupedByHighlightedUseCase {
         return GetShipmentsGroupedByHighlightedUseCase(shipmentsRepository, sortShipmentsUseCase)
     }
 
     @Provides
-    fun provideSortShipmentUseCase() : SortShipmentsUseCase = SortShipmentsUseCase()
+    fun provideSortShipmentUseCase(): SortShipmentsUseCase = SortShipmentsUseCase()
+
+    @Provides
+    fun provideArchiveShipmentUseCase(
+        shipmentsRepository: ShipmentsRepository
+    ): ArchiveShipmentUseCase {
+        return ArchiveShipmentUseCase(shipmentsRepository)
+    }
 }
+

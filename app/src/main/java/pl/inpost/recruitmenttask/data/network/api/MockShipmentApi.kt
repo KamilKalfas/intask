@@ -6,9 +6,15 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import pl.inpost.recruitmenttask.R
-import pl.inpost.recruitmenttask.data.network.adapters.ZoneDateTimeTypeAdapter
-import pl.inpost.recruitmenttask.data.model.*
+import pl.inpost.recruitmenttask.data.model.CustomerDto
+import pl.inpost.recruitmenttask.data.model.EventLogDto
+import pl.inpost.recruitmenttask.data.model.OperationsDto
+import pl.inpost.recruitmenttask.data.model.ShipmentDto
+import pl.inpost.recruitmenttask.data.model.ShipmentStatusDto
+import pl.inpost.recruitmenttask.data.model.ShipmentTypeDto
+import pl.inpost.recruitmenttask.data.model.ShipmentsResponse
 import pl.inpost.recruitmenttask.data.network.adapters.ShipmentStatusTypeAdapter
+import pl.inpost.recruitmenttask.data.network.adapters.ZoneDateTimeTypeAdapter
 import java.time.ZonedDateTime
 import kotlin.random.Random
 

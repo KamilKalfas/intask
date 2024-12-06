@@ -19,6 +19,9 @@ interface ShipmentsDao {
 
     @Query("SELECT EXISTS(SELECT 1 FROM shipments LIMIT 1)")
     suspend fun hasRows(): Boolean
+
+    @Query("SELECT operation_id FROM shipments WHERE number = :shipmentNumber")
+    suspend fun getOperationIdByShipmentNumber(shipmentNumber: String): Long?
 }
 
 

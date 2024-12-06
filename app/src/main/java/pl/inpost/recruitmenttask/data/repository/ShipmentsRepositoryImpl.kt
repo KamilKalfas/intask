@@ -11,15 +11,12 @@ class ShipmentsRepositoryImpl(
 ) : ShipmentsRepository {
 
     override suspend fun getShipments(): List<Shipment> {
-        // if we would have actual network call we could use last-modified header
-        // to check if there are changes and save them
-        // since there is no synchronisation client <-> server
-        // we call fake API only if we haven't saved anything to local db
-        // to persist manual archive changes
-        return if (localDataSource.hasNoSavedData()) {
-            val shipments = remoteDataSource.getShipments()
-            localDataSource.insertAll(shipments)
-            shipments
-        } else localDataSource.getShipments()
+        val shipments = remoteDataSource.getShipments()
+        localDataSource.insertAll(shipments)
+        return localDataSource.getShipments()
+    }
+
+    override suspend fun archiveShipment(shipmentNumber: String) {
+        localDataSource.archiveShipment(shipmentNumber)
     }
 }
