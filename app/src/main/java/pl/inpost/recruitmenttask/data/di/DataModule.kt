@@ -61,9 +61,10 @@ object DataModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
-        return Room.inMemoryDatabaseBuilder(
+        return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
+            AppDatabase.NAME
         ).build()
     }
 
