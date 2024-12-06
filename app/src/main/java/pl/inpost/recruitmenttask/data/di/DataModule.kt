@@ -34,9 +34,11 @@ object DataModule {
     ): ShipmentApi = MockShipmentApi(context, zoneDateTimeTypeAdapter, shipmentStatusTypeAdapter)
 
     @Provides
+    @Singleton
     fun provideShipmentRepository(
         remoteDataSource: ShipmentsRemoteDataSource,
-    ): ShipmentsRepository = ShipmentsRepositoryImpl(remoteDataSource)
+        localDataSource: ShipmentsLocalDataSource,
+    ): ShipmentsRepository = ShipmentsRepositoryImpl(remoteDataSource, localDataSource)
 
     @Provides
     fun provideRemoteDataSource(api: ShipmentApi): ShipmentsRemoteDataSource {
