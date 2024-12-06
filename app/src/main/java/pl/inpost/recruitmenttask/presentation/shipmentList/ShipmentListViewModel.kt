@@ -10,13 +10,15 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.inpost.recruitmenttask.R
 import pl.inpost.recruitmenttask.domain.model.Shipment
+import pl.inpost.recruitmenttask.domain.usecase.ArchiveShipmentUseCase
 import pl.inpost.recruitmenttask.domain.usecase.GetShipmentsGroupedByHighlightedUseCase
 import pl.inpost.recruitmenttask.domain.usecase.GroupedShipmentsResult
 import javax.inject.Inject
 
 @HiltViewModel
 class ShipmentListViewModel @Inject constructor(
-    private val shipmentsGroupedByHighlightedUseCase: GetShipmentsGroupedByHighlightedUseCase
+    private val shipmentsGroupedByHighlightedUseCase: GetShipmentsGroupedByHighlightedUseCase,
+    private val archiveShipmentUseCase: ArchiveShipmentUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
@@ -47,6 +49,9 @@ class ShipmentListViewModel @Inject constructor(
                 }
             }
 
+    fun onArchivePackage(shipmentNumber: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            archiveShipmentUseCase.execute(shipmentNumber)
         }
     }
 
