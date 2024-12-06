@@ -16,6 +16,9 @@ interface ShipmentsDao {
 
     @Insert
     suspend fun insertAll(entities: List<ShipmentEntity>)
+
+    @Query("SELECT EXISTS(SELECT 1 FROM shipments LIMIT 1)")
+    suspend fun hasRows(): Boolean
 }
 
 

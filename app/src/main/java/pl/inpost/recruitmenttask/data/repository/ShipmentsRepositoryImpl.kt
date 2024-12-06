@@ -10,17 +10,16 @@ class ShipmentsRepositoryImpl(
     private val localDataSource: ShipmentsLocalDataSource,
 ) : ShipmentsRepository {
 
-    private var dataSavedInDb = false
-
     override suspend fun getShipments(): List<Shipment> {
-        val shipments = if (!dataSavedInDb) {
-            val remoteShipments = remoteDataSource.getShipments()
-            if (remoteShipments.isNotEmpty()) {
-                localDataSource.insertAll(remoteShipments)
-                dataSavedInDb = true
-            }
-            remoteShipments
+        // if we would have actual network call we could use last-modified header
+        // to check if there are changes and save them
+        // since there is no synchronisation client <-> server
+        // we call fake API only if we haven't saved anything to local db
+        // to persist manual archive changes
+        return if (localDataSource.hasNoSavedData()) {
+            val shipments = remoteDataSource.getShipments()
+            localDataSource.insertAll(shipments)
+            shipments
         } else localDataSource.getShipments()
-        return shipments
     }
-}}
+}

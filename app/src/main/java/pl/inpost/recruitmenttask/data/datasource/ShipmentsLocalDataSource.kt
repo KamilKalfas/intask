@@ -30,4 +30,6 @@ class ShipmentsLocalDataSource(
     suspend fun getShipments(): List<Shipment> {
         return shipmentsDao.getAll().map { it.toDomain() }
     }
+
+    suspend fun hasNoSavedData() : Boolean = !shipmentsDao.hasRows()
 }
