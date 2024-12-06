@@ -40,10 +40,14 @@ fun HomeScreen(
         refreshThreshold = 40.dp
     )
     val homeScreenState = rememberHomeScreenState(state)
+    val archiveShipmentAction: (String) -> Unit = {
+        viewModel.onArchivePackage(it)
+    }
     HomeContent(
         isLoading = state.isLoading,
         state = homeScreenState,
         pullToRefreshState = pullToRefreshState,
+        archiveShipmentAction = archiveShipmentAction,
         modifier = modifier
     )
 }
@@ -54,6 +58,7 @@ private fun HomeContent(
     isLoading: Boolean,
     state: HomeScreenState,
     pullToRefreshState: PullRefreshState,
+    archiveShipmentAction: (String) -> Unit,
     modifier: Modifier
 ) {
     Box(
@@ -68,7 +73,7 @@ private fun HomeContent(
                 .background(MaterialTheme.colors.surface)
         ) {
             if (state.hasNoShipments) noShipmentsMessage()
-            else shipmentsList(state.shipments)
+            else shipmentsList(state.shipments, archiveShipmentAction)
         }
 
         PullRefreshIndicator(

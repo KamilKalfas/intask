@@ -21,7 +21,8 @@ import pl.inpost.recruitmenttask.domain.model.Shipment
 import pl.inpost.recruitmenttask.presentation.theme.dividerText
 
 fun LazyListScope.shipmentsList(
-    shipments: Map<Int, List<Shipment>>
+    shipments: Map<Int, List<Shipment>>,
+    archiveShipmentAction: (String) -> Unit,
 ) {
     shipments.forEach {
         stickyHeader {
@@ -32,7 +33,7 @@ fun LazyListScope.shipmentsList(
             key = { item: Shipment -> item.number }) {
             ShipmentCard(
                 shipment = it,
-                onClick = { /*TODO*/ },
+                onClick = { archiveShipmentAction(it.number) },
                 modifier = Modifier.fillMaxWidth()
             )
         }
