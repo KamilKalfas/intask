@@ -1,22 +1,21 @@
 package pl.inpost.recruitmenttask.data.database
 
 import androidx.room.TypeConverter
+import com.squareup.moshi.FromJson
+import com.squareup.moshi.ToJson
+import pl.inpost.recruitmenttask.data.model.ShipmentStatusDto
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 class Converters {
-    @TypeConverter
-    fun fromTimestamp(value: Long?): ZonedDateTime? {
-        return value?.let {
-            val zoneId = ZoneId.systemDefault()
-            val instant = Instant.ofEpochMilli(it)
-            ZonedDateTime.ofInstant(instant, zoneId)
-        }
-    }
+    private val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
 
     @TypeConverter
-    fun dateToTimestamp(date: ZonedDateTime?): Long? {
-        return date?.toEpochSecond()
-    }
+    fun fromString(value: String): ZonedDateTime = formatter.parse(value, ZonedDateTime::from)
+
+    @TypeConverter
+
+    fun dateToString(date: ZonedDateTime?): String? = date?.format(formatter)
 }
